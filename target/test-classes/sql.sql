@@ -1,2 +1,1 @@
-select * from servicesprice;
-SET GLOBAL time_zone = '+3:00';
+select * from carservice.servicesprice;
