@@ -3,6 +3,7 @@ package ru.mail.shelestova;
 import java.beans.Statement;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class carservice {
     private static final String USERNAME = "root";
@@ -45,7 +46,25 @@ public class carservice {
                         lst.add(new HeadOffice(id, companyTitle, companyAdress));
                     }
                     if (lst.size() > 0) {
-                        System.out.println(lst); //пока так, но потом вывод будет через пользовательский интерфейс, а здесь написать lst = какой-нибудь переменной.
+                        System.out.println("Для того, чтобы узнать адрес главного офиса обслуживающей компании:\n" +
+                                "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
+                        Scanner scan = new Scanner(System.in);
+                        String name = scan.nextLine();
+                        String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... тогда через цикл м.б....
+                        String search2 = lst.get(1).getCompanyTitle();
+
+                        if (name.equals(search1)) {
+                            System.out.println(lst.get(0));
+                        }
+                        else if  (name.equals(search2)) {
+                            System.out.println(lst.get(1));
+                        } else {
+                            System.out.println("Компания не обслуживает, либо неверно введено название компании.");
+                        }
+                        scan.close();
+
+
+
                     } else {
                         System.out.println("Not found.");
                     }
