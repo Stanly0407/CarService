@@ -82,7 +82,8 @@ public class carservice {
                 }
             }
             //здесь снова снова создаем Statement читаю базу данных и новый лист.
-                /* String SQL2 = "SELECT * FROM companies";
+
+                /* String SQL2 = "select o.name, s.serviceName, sp.cost from  servicesprice sp  LEFT JOIN offices o on o.`officeID`=sp.`office__ID` LEFT JOIN services s on s.serviceID=sp.`service__ID`;";
                 try {
                 statement2 = connection.prepareStatement(SQL2);
                 ResultSet rs2 = null;
@@ -90,9 +91,9 @@ public class carservice {
                     rs2 = statement2.executeQuery();
                     ArrayList<Service> lst2 = new ArrayList<>();
                     while (rs2.next()) {
-                        int id = rs2.getInt(1); !!!!!!!!!!!!!
-                        String companyTitle = rs2.getString(2); !!!!!!!!!!
-                        String companyAdress = rs2.getString(3); !!!!!!!!!!!
+                        String companyOffice = rs2.getString(1);
+                        String serviceName = rs2.getString(2);
+                        int service = rs2.getInt(3);
                         lst2.add(new HeadOffice(id, companyTitle, companyAdress)); !!!!!!!!!!!!!!!!!!!!!
                         //создать лист снова
                     }
