@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class carservice  {
+public class carservice {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "503911";
     private static final String URL = "jdbc:mysql://localhost:3306/carservice";
@@ -61,7 +61,7 @@ public class carservice  {
                         } else {
                             System.out.println("Компания не обслуживает, либо неверно введено название компании.");
                         }
-                     scan1.close();
+                        scan1.close();
 
                     } else {
                         System.out.println("Not found.");
@@ -106,10 +106,11 @@ public class carservice  {
                     System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
-                    Scanner scan2 = new Scanner(System.in);
-                   String name2 = null;
-                    while (scan2.hasNext()){
-                     name2 = scan2.next();}
+                        Scanner scan2 = new Scanner(System.in);
+                        String name2 = null;
+                        while (scan2.hasNext()) {
+                            name2 = scan2.next();
+                        }
 
                         String search3 = lst2.get(0).getServiceName();
                         String search4 = lst2.get(1).getServiceName();
@@ -148,7 +149,6 @@ public class carservice  {
                     System.err.println("Statement2 не создан.");
                 }
             }
-
 
         } catch (SQLException ex) {
             System.err.println("Не удалось создать соединение:" + ex);
