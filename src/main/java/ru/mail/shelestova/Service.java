@@ -27,11 +27,13 @@ public class Service extends Cost {
         this.companyOffice = companyOffice;
     }
 
+
     @Override
     public String toString() {
         return "Service{" +
                 "serviceName='" + serviceName + '\'' +
                 ", companyOffice='" + companyOffice + '\'' +
+                ", cost=" + cost +
                 '}';
     }
 }

@@ -3,7 +3,7 @@ package ru.mail.shelestova;
 import java.io.Serializable;
 
 public abstract class Cost implements Serializable, Cloneable {
-    private int cost;
+    protected int cost;
 
     public Cost() {
     }
@@ -12,11 +12,11 @@ public abstract class Cost implements Serializable, Cloneable {
         this.cost = cost;
     }
 
-    public String getCompanyOffice() {
+    public int getCost() {
         return cost;
     }
 
-    public void CompanyOffice(int cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 }

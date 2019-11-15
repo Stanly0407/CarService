@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class carservice {
+public class carservice  {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "503911";
     private static final String URL = "jdbc:mysql://localhost:3306/carservice";
@@ -31,10 +31,7 @@ public class carservice {
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = null;
-            PreparedStatement statement2 = null;
-
             String SQL1 = "SELECT * FROM companies";
-            String SQL2 = "select o.name, s.serviceName, sp.cost from  servicesprice sp  LEFT JOIN offices o on o.`officeID`=sp.`office__ID` LEFT JOIN services s on s.serviceID=sp.`service__ID`;";
 
             try {
                 statement = connection.prepareStatement(SQL1);
@@ -47,7 +44,7 @@ public class carservice {
                         String companyTitle = rs.getString(2);
                         String companyAdress = rs.getString(3);
                         lst.add(new HeadOffice(id, companyTitle, companyAdress));
-                        //создать лист снова
+
                     }
                     System.out.println("Для того, чтобы узнать адрес главного офиса обслуживающей компании:\n" +
                             "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
@@ -85,12 +82,15 @@ public class carservice {
                     System.err.println("Statement не создан.");
                 }
             }
-            //здесь снова снова создаем Statement читаю базу данных и новый лист.
 
+            //здесь снова снова создаем Statement читаю базу данных и новый лист.
+            PreparedStatement statement2 = null;
+            String SQL2 = "select o.name, s.serviceName, sp.cost from  servicesprice sp  LEFT JOIN offices o on o.`officeID`=sp.`office__ID` LEFT JOIN services s on s.serviceID=sp.`service__ID`;";
 
             try {
                 statement2 = connection.prepareStatement(SQL2);
                 ResultSet rs2 = null;
+
                 try {
                     rs2 = statement2.executeQuery();
                     ArrayList<Service> lst2 = new ArrayList<>();
@@ -98,16 +98,18 @@ public class carservice {
                         String companyOffice = rs2.getString(1);
                         String serviceName = rs2.getString(2);
                         int cost = rs2.getInt(3);
-                        lst2.add(new Service (companyOffice, serviceName, cost));
-                        //создать лист снова
+                        lst2.add(new Service(companyOffice, serviceName, cost));
                     }
-                    System.out.println("Чтобы узнать расценки:\n" +
+
+                    System.out.println(lst2); //УДАЛИТЬ ПОТОМ
+
+                    System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
                         Scanner scan2 = new Scanner(System.in);
                         String name2 = scan2.nextLine();
 
-                        String search3 = lst2.get(2).getServiceName(); //не очень, т.к. м.б. много записей...  через цикл м.б....
+                        String search3 = lst2.get(2).getServiceName();
                         String search4 = lst2.get(5).getServiceName();
                         String search5 = lst2.get(8).getServiceName();
                         String search6 = lst2.get(11).getServiceName();
@@ -129,22 +131,21 @@ public class carservice {
                         System.out.println("Not found.");
                     }
                 } finally {
-                    //здесь закрытие ResultSet
+                    //здесь закрытие ResultSet2
                     if (rs2 != null) {
                         rs2.close();
                     } else {
-                        System.err.println("Ошибка во время чтения из базы данных.");
+                        System.err.println("Ошибка во время второго чтения из базы данных.");
                     }
-                     }
+                }
             } finally {
-                //здесь закрытие Statement
-                if (statement != null) {
-                    statement.close();
+                //здесь закрытие Statement2
+                if (statement2 != null) {
+                    statement2.close();
                 } else {
-                    System.err.println("Statement не создан.");
+                    System.err.println("Statement2 не создан.");
                 }
             }
-
 
 
         } catch (SQLException ex) {
