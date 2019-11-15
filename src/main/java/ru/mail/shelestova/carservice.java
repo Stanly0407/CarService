@@ -50,7 +50,7 @@ public class carservice  {
                             "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
                     if (lst.size() > 0) {
                         Scanner scan1 = new Scanner(System.in);
-                        String name = scan1.nextLine();
+                        String name = scan1.next();
                         String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... тогда через цикл м.б....
                         String search2 = lst.get(1).getCompanyTitle();
 
@@ -61,7 +61,7 @@ public class carservice  {
                         } else {
                             System.out.println("Компания не обслуживает, либо неверно введено название компании.");
                         }
-                        scan1.close();
+                     scan1.close();
 
                     } else {
                         System.out.println("Not found.");
@@ -101,18 +101,20 @@ public class carservice  {
                         lst2.add(new Service(companyOffice, serviceName, cost));
                     }
 
-                    System.out.println(lst2); //УДАЛИТЬ ПОТОМ
+                    System.out.println(lst2.get(1)); //УДАЛИТЬ ПОТОМ
 
                     System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
-                        Scanner scan2 = new Scanner(System.in);
-                        String name2 = scan2.nextLine();
+                    Scanner scan2 = new Scanner(System.in);
+                   String name2 = null;
+                    while (scan2.hasNext()){
+                     name2 = scan2.next();}
 
-                        String search3 = lst2.get(2).getServiceName();
-                        String search4 = lst2.get(5).getServiceName();
-                        String search5 = lst2.get(8).getServiceName();
-                        String search6 = lst2.get(11).getServiceName();
+                        String search3 = lst2.get(0).getServiceName();
+                        String search4 = lst2.get(1).getServiceName();
+                        String search5 = lst2.get(2).getServiceName();
+                        String search6 = lst2.get(3).getServiceName();
 
                         if (name2.equals(search3)) {
                             System.out.println(lst2.get(0) + "\\n\"" + lst2.get(4));
