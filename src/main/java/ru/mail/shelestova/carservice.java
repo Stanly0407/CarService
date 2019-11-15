@@ -31,7 +31,11 @@ public class carservice {
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             PreparedStatement statement = null;
+            PreparedStatement statement2 = null;
+
             String SQL1 = "SELECT * FROM companies";
+            String SQL2 = "select o.name, s.serviceName, sp.cost from  servicesprice sp  LEFT JOIN offices o on o.`officeID`=sp.`office__ID` LEFT JOIN services s on s.serviceID=sp.`service__ID`;";
+
             try {
                 statement = connection.prepareStatement(SQL1);
                 ResultSet rs = null;
@@ -83,8 +87,8 @@ public class carservice {
             }
             //здесь снова снова создаем Statement читаю базу данных и новый лист.
 
-                /* String SQL2 = "select o.name, s.serviceName, sp.cost from  servicesprice sp  LEFT JOIN offices o on o.`officeID`=sp.`office__ID` LEFT JOIN services s on s.serviceID=sp.`service__ID`;";
-                try {
+
+            try {
                 statement2 = connection.prepareStatement(SQL2);
                 ResultSet rs2 = null;
                 try {
@@ -93,25 +97,31 @@ public class carservice {
                     while (rs2.next()) {
                         String companyOffice = rs2.getString(1);
                         String serviceName = rs2.getString(2);
-                        int service = rs2.getInt(3);
-                        lst2.add(new HeadOffice(id, companyTitle, companyAdress)); !!!!!!!!!!!!!!!!!!!!!
+                        int cost = rs2.getInt(3);
+                        lst2.add(new Service (companyOffice, serviceName, cost));
                         //создать лист снова
                     }
-                    System.out.println("Для того, чтобы узнать адрес главного офиса обслуживающей компании:\n" +
-                            "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
+                    System.out.println("Чтобы узнать расценки:\n" +
+                            "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
                         Scanner scan2 = new Scanner(System.in);
-                        String name = scan2.nextLine();
+                        String name2 = scan2.nextLine();
 
-                        String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... тогда через цикл м.б....
-                        String search2 = lst.get(1).getCompanyTitle();
+                        String search3 = lst2.get(2).getServiceName(); //не очень, т.к. м.б. много записей...  через цикл м.б....
+                        String search4 = lst2.get(5).getServiceName();
+                        String search5 = lst2.get(8).getServiceName();
+                        String search6 = lst2.get(11).getServiceName();
 
-                        if (name.equals(search1)) {
-                            System.out.println(lst.get(0));
-                        } else if (name.equals(search2)) {
-                            System.out.println(lst.get(1));
+                        if (name2.equals(search3)) {
+                            System.out.println(lst2.get(0) + "\\n\"" + lst2.get(4));
+                        } else if (name2.equals(search4)) {
+                            System.out.println(lst2.get(1) + "\\n\"" + lst2.get(5));
+                        } else if (name2.equals(search5)) {
+                            System.out.println(lst2.get(2) + "\\n\"" + lst2.get(6));
+                        } else if (name2.equals(search6)) {
+                            System.out.println(lst2.get(3) + "\\n\"" + lst2.get(7));
                         } else {
-                            System.out.println("Компания не обслуживает, либо неверно введено название компании.");
+                            System.out.println("Отсутсвует такая услуги, либо неверно введено название услуги.");
                         }
                         scan2.close();
 
@@ -134,7 +144,7 @@ public class carservice {
                     System.err.println("Statement не создан.");
                 }
             }
-                    */
+
 
 
         } catch (SQLException ex) {
