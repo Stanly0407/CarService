@@ -44,7 +44,6 @@ public class carservice {
                         String companyTitle = rs.getString(2);
                         String companyAdress = rs.getString(3);
                         lst.add(new HeadOffice(id, companyTitle, companyAdress));
-
                     }
                     System.out.println("Для того, чтобы узнать адрес главного офиса обслуживающей компании:\n" +
                             "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
@@ -101,16 +100,13 @@ public class carservice {
                         lst2.add(new Service(companyOffice, serviceName, cost));
                     }
 
-                    System.out.println(lst2.get(1)); //УДАЛИТЬ ПОТОМ
+                    System.out.println("\n" + lst2.get(1)); //УДАЛИТЬ ПОТОМ
 
                     System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
                         Scanner scan2 = new Scanner(System.in);
-                        String name2 = null;
-                        while (scan2.hasNext()) {
-                            name2 = scan2.next();
-                        }
+                        String name2 = scan2.nextLine();
 
                         String search3 = lst2.get(0).getServiceName();
                         String search4 = lst2.get(1).getServiceName();
