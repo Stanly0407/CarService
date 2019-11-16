@@ -12,6 +12,7 @@ public class carservice {
     public static void main(String[] args) {
         Connection connection = null;
         Driver driver;
+        Scanner scan1 = new Scanner(System.in);
 
         try {
             driver = new com.mysql.cj.jdbc.Driver();
@@ -48,7 +49,7 @@ public class carservice {
                     System.out.println("Для того, чтобы узнать адрес главного офиса обслуживающей компании:\n" +
                             "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
                     if (lst.size() > 0) {
-                        Scanner scan1 = new Scanner(System.in);
+
                         String name = scan1.next();
                         String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... тогда через цикл м.б....
                         String search2 = lst.get(1).getCompanyTitle();
@@ -60,7 +61,7 @@ public class carservice {
                         } else {
                             System.out.println("Компания не обслуживает, либо неверно введено название компании.");
                         }
-                        scan1.close();
+
 
                     } else {
                         System.out.println("Not found.");
@@ -105,14 +106,18 @@ public class carservice {
                     System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
-                        Scanner scan2 = new Scanner(System.in);
-                        String name2 = scan2.nextLine();
+                      //  final Scanner scan2 = new Scanner(System.in);
+                        String name2 = null;
+                        while (scan1.hasNext()){
+                            name2 = scan1.nextLine();
+                        }
 
                         String search3 = lst2.get(0).getServiceName();
                         String search4 = lst2.get(1).getServiceName();
                         String search5 = lst2.get(2).getServiceName();
                         String search6 = lst2.get(3).getServiceName();
 
+                        assert name2 != null;
                         if (name2.equals(search3)) {
                             System.out.println(lst2.get(0) + "\\n\"" + lst2.get(4));
                         } else if (name2.equals(search4)) {
@@ -124,11 +129,12 @@ public class carservice {
                         } else {
                             System.out.println("Отсутсвует такая услуги, либо неверно введено название услуги.");
                         }
-                        scan2.close();
+
 
                     } else {
                         System.out.println("Not found.");
                     }
+                    scan1.close();
                 } finally {
                     //здесь закрытие ResultSet2
                     if (rs2 != null) {
