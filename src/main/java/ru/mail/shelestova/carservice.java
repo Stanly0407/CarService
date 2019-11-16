@@ -12,7 +12,8 @@ public class carservice {
     public static void main(String[] args) {
         Connection connection = null;
         Driver driver;
-        Scanner scan1 = new Scanner(System.in);
+        final Scanner scan1;
+        scan1 = new Scanner(System.in);
 
         try {
             driver = new com.mysql.cj.jdbc.Driver();
@@ -50,7 +51,7 @@ public class carservice {
                             "введите название компании (например, Lukoil, Gazprom) и нажмите <Enter>:");
                     if (lst.size() > 0) {
 
-                        String name = scan1.next();
+                        String name = scan1.nextLine();
                         String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... тогда через цикл м.б....
                         String search2 = lst.get(1).getCompanyTitle();
 
@@ -106,11 +107,11 @@ public class carservice {
                     System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
                     if (lst2.size() > 0) {
-                      //  final Scanner scan2 = new Scanner(System.in);
-                        String name2 = null;
-                        while (scan1.hasNext()){
-                            name2 = scan1.nextLine();
-                        }
+                    //    String name2 = null;
+                        scan1.skip("[\r\n]+");
+                     //   while (scan1.hasNext()) {
+                        String name2 = scan1.next();
+                       // }
 
                         String search3 = lst2.get(0).getServiceName();
                         String search4 = lst2.get(1).getServiceName();
@@ -130,11 +131,12 @@ public class carservice {
                             System.out.println("Отсутсвует такая услуги, либо неверно введено название услуги.");
                         }
 
-
                     } else {
                         System.out.println("Not found.");
                     }
+
                     scan1.close();
+
                 } finally {
                     //здесь закрытие ResultSet2
                     if (rs2 != null) {
