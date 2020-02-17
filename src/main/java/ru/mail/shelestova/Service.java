@@ -5,8 +5,8 @@ public class Service extends Cost {
     private String companyOffice;
 
 
-    public Service (String companyOffice, String serviceName, int cost) {
-        super (cost);
+    public Service(String companyOffice, String serviceName, int cost) {
+        super(cost);
         this.serviceName = serviceName;
         this.companyOffice = companyOffice;
     }
