@@ -102,7 +102,7 @@ public class carservice {
                         lst2.add(new Service(companyOffice, serviceName, cost));
                     }
 
-                    System.out.println("\n" + lst2.get(1)); //УДАЛИТЬ ПОТОМ
+                  //  System.out.println("\n" + lst2.get(1)); //УДАЛИТЬ ПОТОМ
 
                     System.out.println("\nЧтобы узнать расценки:\n" +
                             "введите название услуги (например, Fuel, Fuel95, Carwarsh, CarwarshGold) и нажмите <Enter>:");
