@@ -24,20 +24,13 @@ public class carservice {
         }
 
         try {
-            DriverManager.registerDriver(driver);
-        } catch (SQLException ex) {
-            System.out.println("Не удалось зарегистрировать драйвер.");
-            return;
-        }
-
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD); //установка соединения с БД
             PreparedStatement statement = null;
             String SQL1 = "SELECT * FROM companies";
 
             try {
-                statement = connection.prepareStatement(SQL1);
-                ResultSet rs = null;
+                statement = connection.prepareStatement(SQL1); //для передачи запроов
+                ResultSet rs = null;                           //для выполнения запросов
                 try {
                     rs = statement.executeQuery();
                     ArrayList<HeadOffice> lst = new ArrayList<>();
@@ -52,7 +45,7 @@ public class carservice {
 
                     if (lst.size() > 0) {
                         String name = scan1.nextLine();
-                        String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... тогда через цикл м.б....
+                        String search1 = lst.get(0).getCompanyTitle(); //не очень, т.к. м.б. много записей... м.б через цикл...мапу...???...
                         String search2 = lst.get(1).getCompanyTitle();
 
                         if (name.equals(search1)) {
@@ -84,7 +77,7 @@ public class carservice {
                 }
             }
 
-            //здесь снова снова создаем Statement читаю базу данных и новый лист.
+            //здесь снова  создаем Statement читаю базу данных и новый лист.
             PreparedStatement statement2 = null;
             String SQL2 = "select o.name, s.serviceName, sp.cost from  servicesprice sp  LEFT JOIN offices o on o.`officeID`=sp.`office__ID` LEFT JOIN services s on s.serviceID=sp.`service__ID`;";
 
